@@ -13,7 +13,6 @@ class Test(TestCase):
             self.assertEqual(testResult, math.pi * math.pow(testInput, 2))  # assert accurate performance of function
         pass
 
-
     def test_first_last(self):
         random.seed()
 
