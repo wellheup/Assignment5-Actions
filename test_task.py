@@ -2,6 +2,7 @@ from unittest import TestCase
 import random
 import math
 import task
+import datetime
 
 
 class Test(TestCase):
@@ -33,4 +34,21 @@ class Test(TestCase):
             listCopy = testList.copy()
             del listCopy[1:len(testList) - 1]
             self.assertListEqual(task.firstLast(testList), listCopy)
+        pass
+
+    def test_time_span(self):
+        random.seed()
+        for x in range(1000):
+            testDates = []
+            for y in range(2): # make 2 random dates
+                testDates.append(datetime.date(1, 1, 1))
+                testDates[0].replace(year = random.randint(datetime.MINYEAR, datetime.MAXYEAR))
+                testDates[0].replace(month = random.randint(1, 12))
+                if [1, 3, 5, 7, 8, 10, 12].count(testDates[0].month) > 0: # months w/ 31
+                    testDates[0].replace(day = random.randint(1, 31))
+                elif [4, 6, 9, 10].count(testDates[0].month) > 0:
+                    testDates[0].replace(day=random.randint(1, 31))
+                else:
+                    testDates[0].replace(day=random.randint(1, 28))
+            self.assertTrue(task.timeSpan(testDates[0], testDates[1]) == (testDates[0] - testDates[1]).days)
         pass

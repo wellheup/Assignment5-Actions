@@ -1,4 +1,5 @@
 import math
+import datetime
 
 
 def firstrun():
@@ -16,3 +17,8 @@ def firstLast(listIn):
         newList = listIn.copy()
         del newList[1:len(newList)-1]
         return newList
+
+
+def timeSpan(dateA, dateB):
+    delta = dateA-dateB
+    return delta.days
