@@ -3,6 +3,7 @@ import random
 import math
 import task
 import datetime
+from datetime import date
 
 
 class Test(TestCase):
@@ -38,17 +39,19 @@ class Test(TestCase):
 
     def test_time_span(self):
         random.seed()
-        for x in range(1000):
+        for x in range(10):
             testDates = []
-            for y in range(2): # make 2 random dates
-                testDates.append(datetime.date(1, 1, 1))
-                testDates[0].replace(year = random.randint(datetime.MINYEAR, datetime.MAXYEAR))
-                testDates[0].replace(month = random.randint(1, 12))
-                if [1, 3, 5, 7, 8, 10, 12].count(testDates[0].month) > 0: # months w/ 31
-                    testDates[0].replace(day = random.randint(1, 31))
-                elif [4, 6, 9, 10].count(testDates[0].month) > 0:
-                    testDates[0].replace(day=random.randint(1, 31))
+            for y in range(2):  # make 2 random dates
+                testYear = (random.randint(datetime.MINYEAR, datetime.MAXYEAR))
+                testMonth = random.randint(1, 12)
+                testDay = 0
+                if [1, 3, 5, 7, 8, 10, 12].count(testMonth) > 0:  # months w/ 31
+                    testDay = random.randint(1, 31)
+                elif [4, 6, 9, 10].count(testMonth) > 0:
+                    testDay = random.randint(1, 31)
                 else:
-                    testDates[0].replace(day=random.randint(1, 28))
-            self.assertTrue(task.timeSpan(testDates[0], testDates[1]) == (testDates[0] - testDates[1]).days)
+                    testDay = random.randint(1, 28)
+                testDates.append(date(testYear, testMonth, testDay))
+            testDelta = abs(testDates[0] - testDates[1])
+            self.assertTrue(task.timeSpan(testDates[0], testDates[1]) == testDelta.days)
         pass

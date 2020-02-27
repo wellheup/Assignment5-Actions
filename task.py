@@ -1,6 +1,5 @@
 import math
-import datetime
-
+from datetime import date
 
 def firstrun():
     return "success"
@@ -20,5 +19,5 @@ def firstLast(listIn):
 
 
 def timeSpan(dateA, dateB):
-    delta = dateA-dateB
-    return delta.days
+    delta = abs(dateA-dateB).days
+    return delta
