@@ -39,7 +39,7 @@ class Test(TestCase):
 
     def test_time_span(self):
         random.seed()
-        for x in range(10):
+        for x in range(1000):
             testDates = []
             for y in range(2):  # make 2 random dates
                 testYear = (random.randint(datetime.MINYEAR, datetime.MAXYEAR))
@@ -48,7 +48,7 @@ class Test(TestCase):
                 if [1, 3, 5, 7, 8, 10, 12].count(testMonth) > 0:  # months w/ 31
                     testDay = random.randint(1, 31)
                 elif [4, 6, 9, 10].count(testMonth) > 0:
-                    testDay = random.randint(1, 31)
+                    testDay = random.randint(1, 30)
                 else:
                     testDay = random.randint(1, 28)
                 testDates.append(date(testYear, testMonth, testDay))
